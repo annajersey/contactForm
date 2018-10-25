@@ -1,4 +1,24 @@
+body {
+    background: #3a3838;
+    color: #a89a9a;
+}
 .contactForm {
-  width: 500px;
-  margin: auto;
+    width: 500px;
+    margin: 50px auto;
+}
+button.btn {
+    float: right;
+    border-radius: 10px;
+    width: 200px;
+}
+.text-error {
+    color: #ff8c78;
+}
+input.form-control, textarea.form-control {
+    background: #4c4c4c !important;
+    border-color: #212121;
+    color:#a89a9a;
+}
+.has-error .form-control {
+    border-color: #ff8c78;
 }
