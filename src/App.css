@@ -10,6 +10,7 @@ button.btn {
     float: right;
     border-radius: 10px;
     width: 200px;
+
 }
 .text-error {
     color: #ff8c78;
@@ -17,8 +18,26 @@ button.btn {
 input.form-control, textarea.form-control {
     background: #4c4c4c !important;
     border-color: #212121;
-    color:#a89a9a;
+    color: #d0c3c3
 }
 .has-error .form-control {
     border-color: #ff8c78;
+}
+.btn-primary {
+    background-image: linear-gradient(to bottom, #7a6f6f 0%, #615454 100%);
+    border: 0;
+    outline: none;
+    color: #d0c3c3
+
+}
+.btn-primary:active:hover, .btn-primary:active, .btn-primary.active {
+    background-color: #615454;
+    outline: none;
+    color: #d0c3c3
+}
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #5c4f4f;
+    background-position: 0 -15px;
+    outline: none;
+    color: #d0c3c3
 }
