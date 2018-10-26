@@ -81,24 +81,24 @@ class Form extends Component {
                 <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                     <label htmlFor="email">Email</label>
                     <input type="email" required className="form-control" name="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={(e) => this.onChange(e)}/>
+                           placeholder="Email"
+                           value={this.state.email}
+                           onChange={(e) => this.onChange(e)}/>
                     <small className="form-text text-error">{this.state.formErrors.email.map(e => e)}</small>
                 </div>
                 <div className={`form-group ${this.errorClass(this.state.formErrors.message)}`}>
                     <label htmlFor="message">Message</label>
                     <textarea rows="10" maxLength="1000" required className="form-control" name="message"
-                        placeholder="Your message here"
-                        value={this.state.message}
-                        onChange={(e) => this.onChange(e)}/>
+                              placeholder="Your message here"
+                              value={this.state.message}
+                              onChange={(e) => this.onChange(e)}/>
                     <small className="form-text text-error">{this.state.formErrors.message.map(e => e)}</small>
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={(e) => this.submitForm(e)}>Submit
                 </button>
                 <div className="result">
-                    {this.state.isLoading&&<img src={loader} alt="loader" className="loader"/>}
-                    {this.state.success&&<span>Your message was sent</span>}
+                    {this.state.isLoading && <img src={loader} alt="loader" className="loader"/>}
+                    {this.state.success && <span>Your message was sent</span>}
                 </div>
             </form>
         );
