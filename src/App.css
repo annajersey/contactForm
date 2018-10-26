@@ -10,17 +10,22 @@ button.btn {
     float: right;
     border-radius: 10px;
     width: 200px;
-
 }
 .text-error {
     color: #ff8c78;
+    display: block;
+    height: 17px;
+    line-height: 22px;
 }
 input.form-control, textarea.form-control {
     background: #4c4c4c !important;
     border-color: #212121;
-    color: #d0c3c3
+    color: #d0c3c3;
 }
-.has-error .form-control {
+textarea:focus, input:focus {
+    outline: none;
+}
+.has-error .form-control, .has-error .form-control:focus {
     border-color: #ff8c78;
 }
 .btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active:hover, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus {
@@ -32,8 +37,8 @@ input.form-control, textarea.form-control {
 }
 .loader {
     float: right;
-    margin: 8px 10px
+    margin: 8px 10px;
 }
 .result {
-    line-height: 34px
+    line-height: 34px;
 }
