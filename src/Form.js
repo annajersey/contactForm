@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import loader from "./loader.gif";
 
 class Form extends Component {
     constructor(props) {
@@ -7,7 +8,9 @@ class Form extends Component {
         this.state = {
             email: "",
             message: "",
-            formErrors: {email: [], message: []}
+            formErrors: {email: [], message: []},
+            isLoading: false,
+            success: false
         };
     }
 
@@ -26,7 +29,7 @@ class Form extends Component {
         if (!this.state.message.length) {
             fieldValidationErrors.message.push("Message is a required field");
         }
-        if (this.state.message.length >= 1000) {
+        if (this.state.message.length > 1000) {
             fieldValidationErrors.message.push("Message max length is 1000");
         }
 
@@ -34,7 +37,7 @@ class Form extends Component {
             formErrors: fieldValidationErrors,
         });
 
-        if (!fieldValidationErrors.email.length && !fieldValidationErrors.message.lenght) {
+        if (!fieldValidationErrors.email.length && !fieldValidationErrors.message.length) {
             return true;
         }
         return false;
@@ -44,38 +47,26 @@ class Form extends Component {
         e.preventDefault();
         if (this.validateFields()) {
             this.setState({
-                isLoading: false
+                isLoading: true
             });
             axios.post("https://dcodeit.net/oleksii.babich/language-test/public/index.php/api/messages", {
                 email: this.state.email,
                 text: this.state.message
             })
                 .then((response) => {
-                    console.log(response);
+                    if (response.data.id) {
+                        this.setState({
+                            isLoading: false,
+                            success: true
+                        });
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.setState({
+                        isLoading: false
+                    });
                 });
-
-            // fetch(encodeURI(url))
-            //     .then(response => {
-            //         if (!response.ok) {
-            //             throw Error("Network request failed")
-            //         }
-            //         return response
-            //     })
-            //     .then(d => d.json())
-            //     .then(result => {
-            //         this.setState({
-            //             isLoading: false
-            //         });
-            //         if (callback) callback(result);
-            //     }, (i) => {
-            //         console.log(i);
-            //         this.setState({
-            //             requestFailed: true
-            //         })
-            //     })
         }
     }
 
@@ -105,6 +96,10 @@ class Form extends Component {
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={(e) => this.submitForm(e)}>Submit
                 </button>
+                <div className="result">
+                    {this.state.isLoading&&<img src={loader} alt="loader" className="loader"/>}
+                    {this.state.success&&<span>Your message was sent</span>}
+                </div>
             </form>
         );
     }

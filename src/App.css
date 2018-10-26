@@ -23,13 +23,17 @@ input.form-control, textarea.form-control {
 .has-error .form-control {
     border-color: #ff8c78;
 }
-.btn-primary, .btn-primary:hover, .btn-primary:focus,.btn-primary:active:hover, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus {
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active:hover, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus {
     background-image: linear-gradient(to bottom, #6f6464 0%, #615454 50%);
     background-color: #5c4f4f;
     border: 0;
     outline: none;
     color: #d0c3c3;
-
 }
-
-
+.loader {
+    float: right;
+    margin: 8px 10px
+}
+.result {
+    line-height: 34px
+}
