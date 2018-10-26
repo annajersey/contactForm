@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import axios from "axios";
 
 class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            message: '',
+            email: "",
+            message: "",
             formErrors: {email: [], message: []}
-        }
+        };
     }
 
     onChange(e) {
@@ -18,26 +18,69 @@ class Form extends Component {
     }
 
     validateFields() {
-        let fieldValidationErrors = {email: [], message: []};
+        const fieldValidationErrors = {email: [], message: []};
 
-        if (!this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) fieldValidationErrors.email.push('Please enter a valid email');
-        if (!this.state.message.length) fieldValidationErrors.message.push('Message is a required field');
-        if (this.state.message.length >= 1000) fieldValidationErrors.message.push('Message max length is 1000');
+        if (!this.state.email.match(/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i)) {
+            fieldValidationErrors.email.push("Please enter a valid email");
+        }
+        if (!this.state.message.length) {
+            fieldValidationErrors.message.push("Message is a required field");
+        }
+        if (this.state.message.length >= 1000) {
+            fieldValidationErrors.message.push("Message max length is 1000");
+        }
 
         this.setState({
             formErrors: fieldValidationErrors,
         });
 
+        if (!fieldValidationErrors.email.length && !fieldValidationErrors.message.lenght) {
+            return true;
+        }
+        return false;
     }
 
     submitForm(e) {
         e.preventDefault();
-        this.validateFields();
-        console.log('send')
+        if (this.validateFields()) {
+            this.setState({
+                isLoading: false
+            });
+            axios.post("https://dcodeit.net/oleksii.babich/language-test/public/index.php/api/messages", {
+                email: this.state.email,
+                text: this.state.message
+            })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+            // fetch(encodeURI(url))
+            //     .then(response => {
+            //         if (!response.ok) {
+            //             throw Error("Network request failed")
+            //         }
+            //         return response
+            //     })
+            //     .then(d => d.json())
+            //     .then(result => {
+            //         this.setState({
+            //             isLoading: false
+            //         });
+            //         if (callback) callback(result);
+            //     }, (i) => {
+            //         console.log(i);
+            //         this.setState({
+            //             requestFailed: true
+            //         })
+            //     })
+        }
     }
 
     errorClass(error) {
-        return (error.length === 0 ? '' : 'has-error');
+        return (error.length === 0 ? "" : "has-error");
     }
 
     render() {
@@ -54,15 +97,16 @@ class Form extends Component {
                 </div>
                 <div className={`form-group ${this.errorClass(this.state.formErrors.message)}`}>
                     <label htmlFor="message">Message</label>
-                    <textarea rows='10' maxLength="1000" required className="form-control" name="message"
+                    <textarea rows="10" maxLength="1000" required className="form-control" name="message"
                               placeholder="Your message here"
                               value={this.state.message}
                               onChange={(e) => this.onChange(e)}/>
                     <small className="form-text text-error">{this.state.formErrors.message.map(e => e)}</small>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={(e) => this.submitForm(e)}>Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={(e) => this.submitForm(e)}>Submit
+                </button>
             </form>
-        )
+        );
     }
 }
 

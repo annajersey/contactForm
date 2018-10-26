@@ -1,0 +1,74 @@
+{
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "rules": {
+    "space-before-function-paren": "off",
+    "react/prefer-stateless-function": "warn",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "linebreak-style": "off",
+    "global-require": "off",
+    "arrow-body-style": "off",
+    "indent": ["error",4],
+    "jsx-quotes": ["error", "prefer-double"],
+    "semi": [
+      2,
+      "always"
+    ],
+    "quotes": [
+      "error",
+      "double",
+      {
+        "allowTemplateLiterals": true
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "padding-line-between-statements": [
+      "error",
+      {"blankLine": "always", "prev": "import", "next": "*"},
+      {"blankLine": "any", "prev": "import", "next": "import"}
+    ],
+    "prefer-arrow-callback": [
+      "error",
+      {
+        "allowUnboundThis": false
+      }
+    ],
+    "prefer-arrow/prefer-arrow-functions": [
+      "warn",
+      {
+        "disallowPrototype": true,
+        "singleReturnOnly": true,
+        "classPropertiesAllowed": false
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all"
+      }
+    ],
+    "curly": ["error", "all"],
+    "no-var": ["error"],
+    "prefer-const": ["error"],
+    "keyword-spacing": ["error"]
+  }
+}
